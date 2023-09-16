@@ -1866,5 +1866,3 @@ $database = new Method([
 	'charset' => 'utf8',
 	'port' => 3306,
 ]);
-
-
