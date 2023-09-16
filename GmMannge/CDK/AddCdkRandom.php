@@ -39,36 +39,36 @@
             </div>
           </form>
           <p class="forget">返回主页
-            <a href="index.html">点击这里</a>
+            <a href="../../index.html">点击这里</a>
           </p>
-          <?php
-          include("../../Function/Method.php");
-          if (isset($_POST["addcdk"])) {
-            if ($_POST["adminpass"] == '888888') {
-              $back = $database->select("cdk", "*");
-              $id = intval($back[count($back) - 1]["id"]) + 1;
-              echo "<font size='4' color='#00BFFF'>CDK奖励" . $_POST["item"] . "x" . $_POST["number"] . "<br>";
-              echo "<font size='4' color='#00BFFF'>CDK:<br>";
-              $tmp = array();
-              while (count($tmp) < $_POST["cdk_number"]) {
-                $tmp[] = mt_rand(10000000, 99999999);
-                $tmp = array_unique($tmp);
-              }
-              for ($i = 0; $i < $_POST["cdk_number"]; $i++) {
-                $awa = $tmp[$i];
-                $back = $database->select("cdk", "*");
-                $id = intval($back[count($back) - 1]["id"]) + 1;
-                $database->insert("cdk", ["id" => $id, "cdk" => $awa, "item" => $_POST["item"], "number" => intval($_POST["number"]), "start" => 1]);
-                echo "<font size='4' color='#00BFFF'>" . $awa . "<br>";
-              }
-            } else {
-              echo "<font size='4' color='#00BFFF'>GM码错误!";
-            }
-          }
-          ?>
         </div>
       </div>
     </div>
   </section>
+<?php
+  include("../../Function/Method.php");
+  if (isset($_POST["addcdk"])) {
+    if ($_POST["adminpass"] == '888888') {
+      $back = $database->select("cdk", "*");
+      $id = intval($back[count($back) - 1]["id"]) + 1;
+      echo "<font size='4' color='#00BFFF'>CDK奖励" . $_POST["item"] . "x" . $_POST["number"] . "<br>";
+      echo "<font size='4' color='#00BFFF'>CDK:<br>";
+      $tmp = array();
+      while (count($tmp) < $_POST["cdk_number"]) {
+        $tmp[] = mt_rand(10000000, 99999999);
+        $tmp = array_unique($tmp);
+      }
+      for ($i = 0; $i < $_POST["cdk_number"]; $i++) {
+        $awa = $tmp[$i];
+        $back = $database->select("cdk", "*");
+        $id = intval($back[count($back) - 1]["id"]) + 1;
+        $database->insert("cdk", ["id" => $id, "cdk" => $awa, "item" => $_POST["item"], "number" => intval($_POST["number"]), "start" => 1]);
+        echo "<font size='4' color='#00BFFF'>" . $awa . "<br>";
+      }
+    } else {
+      echo "<font size='4' color='#00BFFF'>GM码错误!";
+    }
+  }
+?>
 </body>
 </html>

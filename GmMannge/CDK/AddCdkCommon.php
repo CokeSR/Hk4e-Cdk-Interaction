@@ -38,22 +38,25 @@
               <input type="submit" value="生成永久CDK" name="addcdk">
             </div>
           </form>
-          <?php
-          include("../../Function/Method.php");
-          if (isset($_POST["addcdk"])) {
-            $back = $database->select("cdk", "*");
-            $id = intval($back[count($back) - 1]["id"]) + 1;
-            if ($_POST["adminpass"] == '888888') {
-              $database->insert("cdk", ["id" => $id, "cdk" => $_POST["cdk"], "item" => $_POST["item"], "number" => intval($_POST["number"]), "start" => 2]);
-              echo "<font size='4' color='#00BFFF'>CDK生成成功!";
-            } else {
-              echo "<font size='4' color='#00BFFF'>GM码错误!";
-            }
-          }
-          ?>
+          <p class="forget">返回主页
+            <a href="../../index.html">点击这里</a>
+          </p>
         </div>
       </div>
     </div>
   </section>
+<?php
+  include("../../Function/Method.php");
+  if (isset($_POST["addcdk"])) {
+    $back = $database->select("cdk", "*");
+    $id = intval($back[count($back) - 1]["id"]) + 1;
+    if ($_POST["adminpass"] == '888888') {
+      $database->insert("cdk", ["id" => $id, "cdk" => $_POST["cdk"], "item" => $_POST["item"], "number" => intval($_POST["number"]), "start" => 2]);
+      echo "<font size='4' color='#00BFFF'>CDK生成成功!";
+    } else {
+      echo "<font size='4' color='#00BFFF'>GM码错误!";
+    }
+  }
+?>
 </body>
 </html>

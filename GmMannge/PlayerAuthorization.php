@@ -32,13 +32,14 @@
               <input type="submit" value="授权" name="addpsd">
             </div>
           </form>
-          <p class="forget">返回主页 <a href="index.html">点击这里</a></p>
+          <p class="forget">返回主页
+              <a href="../../index.html">点击这里</a>
+            </p>
         </div>
       </div>
     </div>
   </section>
-
-  <?php
+<?php
   include("../Function/Method.php");
   if (isset($_POST["addpsd"])) {
     $back = $database->select("fuli", "*");
@@ -52,6 +53,6 @@
       echo "<font size='4' color='#00BFFF'>GM码错误!";
     }
   }
-  ?>
+?>
 </body>
 </html>
