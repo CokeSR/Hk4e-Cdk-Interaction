@@ -207,7 +207,7 @@ section .color:nth-child(3) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #0000ff;
+    color: #0000FF;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -238,7 +238,7 @@ section .color:nth-child(3) {
     text-decoration: none;
     
 }</style>
-    <title>生成指定CDK</title>
+    <title>兑换CDK</title>
   </head>
   <body>
     <section>
@@ -261,7 +261,7 @@ section .color:nth-child(3) {
         </div>
         <div class="container">
           <div class="form">
-            <h2>一个账户使用一次</h2>
+            <h2>生成CDK</h2>
             <form method="POST">
               <div class="inputBox">
                 <input type="text" name="adminpass" placeholder="GM码">
@@ -276,16 +276,19 @@ section .color:nth-child(3) {
                 <input type="number" name="number" placeholder="物品数量">
               </div>
               <div class="inputBox">
-                <input type="submit" value="生成永久CDK" name="addcdk">
+                <input type="submit" value="生成CDK" name="addcdk">
               </div>
             </form>
+            <p class="forget">返回主页
+              <a href="index.html">点击这里</a>
+            </p>
             <?php
-include("./Method.php");
+include("../Method.php");
 if(isset($_POST["addcdk"])){
     $back=$database->select("cdk","*");
     $id=intval($back[count($back)-1]["id"])+1;
     if($_POST["adminpass"]=='888888'){
-        $database->insert("cdk",["id" => $id,"cdk"=>$_POST["cdk"],"item" => $_POST["item"],"number"=>intval($_POST["number"]),"start"=>2
+        $database->insert("cdk",["id" => $id,"cdk"=>$_POST["cdk"],"item" => $_POST["item"],"number"=>intval($_POST["number"]),"start"=>1
         ]);
         echo "<font size='4' color= '#00BFFF'>CDK生成成功!";
 
