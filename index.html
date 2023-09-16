@@ -1,43 +1,60 @@
-<meta charset="UTF-8">
-
-<style type="text/css">
-body
-{
-background: url(Img/BackGround/Genshin.png);
-background-repeat:no-repeat;
-background-position:top,center;
-background-attachment:fixed;
-background-origin:border-box;
-
-}
-</style>
-
-<title>醒目吧原神</title>
-
-<center>
-
-<br><br>
-
-<a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}><img src=Img/BackGround/Logo.png width=800 height=300></a>
-
-<br><br><br>
-
-<a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Primogem.php><img src=Img/Button/Primogem.png width=220 height=150></a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Mora.php><img src=Img/Button/Mora.png width=220 height=150></a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Resin.php><img src=Img/Button/Resin.png width=220 height=150></a>
-
-<br><br>
-<br><br>
-
-<font size=6>
-<a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/newplayer.php>新手经验书福利</a> | <a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Primogem.php>新手原石福利</a>
-</font>
-
-<br><br><br>
-<a href=index.php><img src=Img/Button/Cdk.png></a>
-<br><br>
-醒目吧原神| <a href=http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/index.html><b>回首页</b></a>
-
-</center>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="Img/BackGround/Favicon.ico">
+  <title>醒目吧原神</title>
+  <style>
+    body {
+      position: relative;
+    }
+    .background-image {
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-image: url('Img/BackGround/Genshin.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .center {
+      text-align: center;
+    }
+    .button {
+      display: inline-block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-image"></div>
+  <div class="center">
+    <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}">
+      <img src="Img/BackGround/Logo.png" width="700" height="450" alt="Logo">
+    </a>
+    <br><br><br>
+    <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Settings/Primogem.php" class="button">
+      <img src="Img/Button/Primogem.png" width="350" height="210" alt="Primogem">
+    </a>
+    <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Settings/Mora.php" class="button">
+      <img src="Img/Button/Mora.png" width="350" height="210" alt="Mora">
+    </a>
+    <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Settings/Resin.php" class="button">
+      <img src="Img/Button/Resin.png" width="350" height="210" alt="Resin">
+    </a>
+    <br><br>
+    <br><br>
+    <font size="6">
+      <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Settings/newplayer.php">新手经验书福利</a> |
+      <a href="http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/Function/Settings/Primogem.php">新手原石福利</a>
+    </font>
+    <br><br><br>
+    <a href="Function/CdkExchange.php" class="button">
+      <img src="Img/Button/Cdk.png" alt="CDK Exchange">
+    </a>
+  </div>
+</body>
+</html>
