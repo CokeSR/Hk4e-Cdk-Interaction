@@ -280,7 +280,7 @@ section .color:nth-child(3) {
               </div>
             </form>
             <?php
-include("./Medoo.php");
+include("./Method.php");
 if(isset($_POST["addcdk"])){
     $back=$database->select("cdk","*");
     $id=intval($back[count($back)-1]["id"])+1;

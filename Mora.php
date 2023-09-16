@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+
+<style type="text/css">
+	body{
+		background: url("") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;                
+                background-size: cover;
+	}
+	</style>
+	
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -204,7 +215,7 @@ section .color:nth-child(3) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #0000ff;
+    color: #0000FF;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -235,7 +246,7 @@ section .color:nth-child(3) {
     text-decoration: none;
     
 }</style>
-    <title>新手福利</title>
+    <title>无限签到</title>
   </head>
   <body>
     <section>
@@ -258,33 +269,42 @@ section .color:nth-child(3) {
         </div>
         <div class="container">
           <div class="form">
-            <h2>新手福利</h2>
+            <h2>无限免费领取1万摩拉（金币）</h2>
             <form method="POST">
               <div class="inputBox">
                 <input type="number" name="uid" placeholder="请输入游戏UID">
               </div>
               <div class="inputBox">
-                <input type="submit" value="新人福利-1000原石" name="new">
+                <input type="submit" value="签到领取" name="Mora">
               </div>
               <div class="inputBox">
-                <a href="index.html"> <input value="                返回上一页" ></a>
+                <a href="index.html"> <input value="返回上一页" ></a>
               </div>
             </form>
             <?php
-include("./Medoo.php");
-if(isset($_POST["new"])){
-    $back=$database->select("new","*",["uid"=>$_POST["uid"]]);
-    if($back[0]["uid"]==""){
-        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+include("./Method.php");
+if(isset($_POST["Mora"])){
+    $back=$database->select("Mora","*",["uid"=>$_POST["uid"]]);
+    if($back[0]["last"]==date("Y-m-d")){
+        echo "<font size='4' color= '#00BFFF'>您今天已经签到了";
+    }elseif($back[0]["uid"]==""){
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=202&uid=".$_POST["uid"]."&number=10000"),true);
         if($run["success"]==false){
-            echo "<font size='5' color= red>领取失败,请保证游戏在线";
+            echo "<font size='4' color= '#00BFFF'>签到失败,请保证游戏在线";
         }elseif($run["success"]==true){
-            echo "<font size='4' color= '#00BFFF'>领取成功";
-            var_dump($run);
-            $database->insert("new",["uid" => $_POST["uid"],"time"=>date("Y-m-d")]);
+            echo "<font size='4' color= '#00BFFF'>签到成功";
+            $database->insert("Mora",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
         }
-    }else{
-        echo "<font size='4' color= '#00BFFF'>您已经领取过了";
+    }elseif($back[0]["uid"]!=""){
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=202&uid=".$_POST["uid"]."&number=10000"),true);
+        if($run["success"]==false){
+            echo "<font size=5 color=red>签到失败，请保证游戏在线</font>";
+        }elseif($run["success"]==true){
+           echo "<font size='4' color= '#00BFFF'>签到成功";
+            $database->update("Mora",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
+        }
+
+
     }
 }
     

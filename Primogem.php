@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+
+<style type="text/css">
+	body{
+		background: url("") no-repeat center center fixed;
+                /*兼容浏览器版本*/
+                -webkit-background-size: cover;
+                -o-background-size: cover;                
+                background-size: cover;
+	}
+	</style>
+	
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -92,9 +103,6 @@ section .color:nth-child(3) {
 @keyframes animate {
     0%, 100%, {
         transform: translateY(-50px);
-    }
-    50% {
-        transform: translateY(50px);
     }
 }
 
@@ -238,7 +246,7 @@ section .color:nth-child(3) {
     text-decoration: none;
     
 }</style>
-    <title>兑换CDK</title>
+    <title>无限签到</title>
   </head>
   <body>
     <section>
@@ -261,39 +269,42 @@ section .color:nth-child(3) {
         </div>
         <div class="container">
           <div class="form">
-            <h2>生成CDK</h2>
+            <h2>无限签到(免费领取1000原石)</h2>
             <form method="POST">
               <div class="inputBox">
-                <input type="text" name="adminpass" placeholder="GM码">
+                <input type="number" name="uid" placeholder="请输入游戏UID">
               </div>
               <div class="inputBox">
-                <input type="text" name="cdk" placeholder="要生成的CDK">
+                <input type="submit" value="签到领取" name="Primogem">
               </div>
               <div class="inputBox">
-                <input type="number" name="item" placeholder="生成物品ID">
-              </div>
-              <div class="inputBox">
-                <input type="number" name="number" placeholder="物品数量">
-              </div>
-              <div class="inputBox">
-                <input type="submit" value="生成CDK" name="addcdk">
+                <a href="index.html"> <input value="返回上一页" ></a>
               </div>
             </form>
-            <p class="forget">返回主页
-              <a href="index.html">点击这里</a>
-            </p>
             <?php
-include("./Medoo.php");
-if(isset($_POST["addcdk"])){
-    $back=$database->select("cdk","*");
-    $id=intval($back[count($back)-1]["id"])+1;
-    if($_POST["adminpass"]=='888888'){
-        $database->insert("cdk",["id" => $id,"cdk"=>$_POST["cdk"],"item" => $_POST["item"],"number"=>intval($_POST["number"]),"start"=>1
-        ]);
-        echo "<font size='4' color= '#00BFFF'>CDK生成成功!";
+include("./Method.php");
+if(isset($_POST["Primogem"])){
+    $back=$database->select("Primogem","*",["uid"=>$_POST["uid"]]);
+    if($back[0]["last"]==date("Y-m-d")){
+        echo "<font size='4' color= '#00BFFF'>您今天已经签到了";
+    }elseif($back[0]["uid"]==""){
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+        if($run["success"]==false){
+            echo "<font size='4' color= '#00BFFF'>签到失败,请保证游戏在线";
+        }elseif($run["success"]==true){
+            echo "<font size='4' color= '#00BFFF'>签到成功";
+            $database->insert("Primogem",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
+        }
+    }elseif($back[0]["uid"]!=""){
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+        if($run["success"]==false){
+            echo "<font size=5 color=red>签到失败，请保证游戏在线</font>";
+        }elseif($run["success"]==true){
+           echo "<font size='4' color= '#00BFFF'>签到成功";
+            $database->update("Primogem",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
+        }
 
-    }else{
-        echo "<font size='4' color= '#00BFFF'>GM码错误!";
+
     }
 }
     
@@ -303,7 +314,6 @@ if(isset($_POST["addcdk"])){
       </div>
     </section>
   </body>
-
 </html>
 
 

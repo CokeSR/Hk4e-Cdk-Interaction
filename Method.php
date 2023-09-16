@@ -1,14 +1,14 @@
 <?php
 /*!
- * Medoo database framework
- * https://medoo.in
+ * Method database framework
+ * https://Method.in
  * Version 1.7.10
  *
  * Copyright 2020, Angel Lai
  * Released under the MIT license
  */
 
-namespace Medoo;
+namespace Method;
 
 use PDO;
 use Exception;
@@ -20,7 +20,7 @@ class Raw {
 	public $value;
 }
 
-class Medoo
+class Method
 {
 	public $pdo;
 
@@ -1642,7 +1642,7 @@ class Medoo
 
 		if ($this->type === 'mssql')
 		{
-			$query = $this->exec($this->selectContext($table, $map, $join, $column, $where, Medoo::raw('TOP 1 1')), $map);
+			$query = $this->exec($this->selectContext($table, $map, $join, $column, $where, Method::raw('TOP 1 1')), $map);
 		}
 		else
 		{
@@ -1850,11 +1850,11 @@ class Medoo
 		return $output;
 	}
 }
-require_once 'Medoo.php';
+require_once 'Method.php';
 
-use Medoo\Medoo;
+use Method\Method;
  
-$database = new Medoo([
+$database = new Method([
 	// required
 	'database_type' => 'mysql',
 	'database_name' => 'db_hk4e_gm',

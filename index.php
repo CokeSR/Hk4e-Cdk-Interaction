@@ -275,7 +275,7 @@ section .color:nth-child(3) {
               </div>
             </form>
             <?php
-include("./Medoo.php");
+include("./Method.php");
 if(isset($_POST["usecdk"])){
     $back=$database->select("cdk","*",["cdk"=>$_POST["cdk"]]);
     $used=$database->select("used_cdk","*",["cdk"=>$_POST["cdk"],"uid"=>$_POST["uid"]]);

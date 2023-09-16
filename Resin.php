@@ -246,7 +246,7 @@ section .color:nth-child(3) {
     text-decoration: none;
     
 }</style>
-    <title>无限签到</title>
+    <title>每日签到</title>
   </head>
   <body>
     <section>
@@ -269,39 +269,39 @@ section .color:nth-child(3) {
         </div>
         <div class="container">
           <div class="form">
-            <h2>无限免费领取1万摩拉（金币）</h2>
+            <h2>每日免费领取2个脆弱树脂</h2>
             <form method="POST">
               <div class="inputBox">
                 <input type="number" name="uid" placeholder="请输入游戏UID">
               </div>
               <div class="inputBox">
-                <input type="submit" value="签到领取" name="mola">
+                <input type="submit" value="签到领取" name="Resin">
               </div>
               <div class="inputBox">
-                <a href="index.html"> <input value="                返回上一页" ></a>
+                <a href="index.html"> <input value="返回上一页" ></a>
               </div>
             </form>
             <?php
-include("./Medoo.php");
-if(isset($_POST["mola"])){
-    $back=$database->select("mola","*",["uid"=>$_POST["uid"]]);
+include("./Method.php");
+if(isset($_POST["Resin"])){
+    $back=$database->select("Resin","*",["uid"=>$_POST["uid"]]);
     if($back[0]["last"]==date("Y-m-d")){
         echo "<font size='4' color= '#00BFFF'>您今天已经签到了";
     }elseif($back[0]["uid"]==""){
-        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=202&uid=".$_POST["uid"]."&number=10000"),true);
+        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=107009&uid=".$_POST["uid"]."&number=2"),true);
         if($run["success"]==false){
             echo "<font size='4' color= '#00BFFF'>签到失败,请保证游戏在线";
         }elseif($run["success"]==true){
             echo "<font size='4' color= '#00BFFF'>签到成功";
-            $database->insert("mola",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
+            $database->insert("Resin",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
         }
     }elseif($back[0]["uid"]!=""){
-        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=202&uid=".$_POST["uid"]."&number=10000"),true);
+        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=107009&uid=".$_POST["uid"]."&number=2"),true);
         if($run["success"]==false){
             echo "<font size=5 color=red>签到失败，请保证游戏在线</font>";
         }elseif($run["success"]==true){
            echo "<font size='4' color= '#00BFFF'>签到成功";
-            $database->update("mola",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
+            $database->update("Resin",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
         }
 
 

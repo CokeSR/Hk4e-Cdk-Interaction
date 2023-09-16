@@ -93,6 +93,9 @@ section .color:nth-child(3) {
     0%, 100%, {
         transform: translateY(-50px);
     }
+    50% {
+        transform: translateY(50px);
+    }
 }
 
 .box .circle:nth-child(1) {
@@ -204,7 +207,7 @@ section .color:nth-child(3) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 16px;
     letter-spacing: 1px;
-    color: #0000ff;
+    color: #0000FF;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
@@ -225,17 +228,17 @@ section .color:nth-child(3) {
 
 .forget {
     margin-top: 6px;
-    color: #fff;
+    color: #black;
     letter-spacing: 1px;
 }
 
 .forget a {
-    color: #fff;
+    color: #black;
     font-weight: 600;
     text-decoration: none;
     
 }</style>
-    <title>新手福利</title>
+    <title>生成随机CDK</title>
   </head>
   <body>
     <section>
@@ -258,33 +261,49 @@ section .color:nth-child(3) {
         </div>
         <div class="container">
           <div class="form">
-            <h2>新手福利</h2>
+            <h2>每张卡只能使用一次</h2>
             <form method="POST">
               <div class="inputBox">
-                <input type="number" name="uid" placeholder="请输入游戏UID">
+                <input type="text" name="adminpass" placeholder="GM码">
               </div>
               <div class="inputBox">
-                <input type="submit" value="新人福利-大英雄的经验10本" name="jys">
+                <input type="number" name="cdk_number" placeholder="要生成CDK的数量">
               </div>
               <div class="inputBox">
-                <a href="index.html"> <input value="                返回上一页" ></a>
+                <input type="number" name="item" placeholder="生成物品ID">
+              </div>
+              <div class="inputBox">
+                <input type="number" name="number" placeholder="物品数量">
+              </div>
+              <div class="inputBox">
+                <input type="submit" value="批量生成CDK" name="addcdk">
               </div>
             </form>
+            <p class="forget">返回主页
+              <a href="index.html">点击这里</a>
+            </p>
             <?php
-include("./Medoo.php");
-if(isset($_POST["jys"])){
-    $back=$database->select("jys","*",["uid"=>$_POST["uid"]]);
-    if($back[0]["uid"]==""){
-        $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=104003&uid=".$_POST["uid"]."&number=10"),true);
-        if($run["success"]==false){
-            echo "<font size='5' color= red>领取失败,请保证游戏在线";
-        }elseif($run["success"]==true){
-            echo "<font size='4' color= '#00BFFF'>领取成功";
-            var_dump($run);
-            $database->insert("jys",["uid" => $_POST["uid"],"time"=>date("Y-m-d")]);
+include("./Method.php");
+if(isset($_POST["addcdk"])){
+    if($_POST["adminpass"]=='888888'){
+        $back=$database->select("cdk","*");
+        $id=intval($back[count($back)-1]["id"])+1;
+        echo "<font size='4' color= '#00BFFF'>CDK奖励".$_POST["item"]."x".$_POST["number"]."<br>";
+        echo "<font size='4' color= '#00BFFF'>CDK:<br>";
+        $tmp=array();
+        while(count($tmp)<$_POST["cdk_number"]){
+            $tmp[]=mt_rand(10000000,99999999);
+            $tmp=array_unique($tmp);
+        }
+        for ($i=0;$i<$_POST["cdk_number"]; $i++) {
+            $awa=$tmp[$i];
+            $back=$database->select("cdk","*");
+            $id=intval($back[count($back)-1]["id"])+1;
+            $database->insert("cdk",["id"=>$id,"cdk"=>$awa,"item"=> $_POST["item"],"number"=>intval($_POST["number"]),"start"=>1]);
+            echo "<font size='4' color= '#00BFFF'>".$awa."<br>";
         }
     }else{
-        echo "<font size='4' color= '#00BFFF'>您已经领取过了";
+        echo "<font size='4' color= '#00BFFF'>GM码错误!";
     }
 }
     
