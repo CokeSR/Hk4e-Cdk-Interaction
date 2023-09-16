@@ -275,7 +275,7 @@ include("./Method.php");
 if(isset($_POST["NewPlayer"])){
     $back=$database->select("NewPlayer","*",["uid"=>$_POST["uid"]]);
     if($back[0]["uid"]==""){
-        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
         if($run["success"]==false){
             echo "<font size='5' color= red>领取失败,请保证游戏在线";
         }elseif($run["success"]==true){

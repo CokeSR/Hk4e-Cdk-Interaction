@@ -288,7 +288,7 @@ if(isset($_POST["Primogem"])){
     if($back[0]["last"]==date("Y-m-d")){
         echo "<font size='4' color= '#00BFFF'>您今天已经签到了";
     }elseif($back[0]["uid"]==""){
-        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
         if($run["success"]==false){
             echo "<font size='4' color= '#00BFFF'>签到失败,请保证游戏在线";
         }elseif($run["success"]==true){
@@ -296,7 +296,7 @@ if(isset($_POST["Primogem"])){
             $database->insert("Primogem",["uid" => $_POST["uid"],"last"=>date("Y-m-d")]);
         }
     }elseif($back[0]["uid"]!=""){
-        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:81/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
+        $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/api/api.php?adminpass=blueyst&item=201&uid=".$_POST["uid"]."&number=1000"),true);
         if($run["success"]==false){
             echo "<font size=5 color=red>签到失败，请保证游戏在线</font>";
         }elseif($run["success"]==true){

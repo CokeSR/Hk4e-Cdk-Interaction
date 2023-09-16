@@ -289,7 +289,7 @@ if(isset($_POST["usecdk"])){
 		echo "<font size='10' color= '#00BFFF'>CDK不存在!";
 	}elseif($used[0]==""){
 	    if($back1["start"]==1){
-            $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=".$back1["item"]."&uid=".$_POST["uid"]."&number=".$back1["number"]),true);
+            $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/api/api.php?adminpass=blueyst&item=".$back1["item"]."&uid=".$_POST["uid"]."&number=".$back1["number"]),true);
             if($run["success"]==false){
                 echo "<font size='4' color= '#00BFFF'>玩家不在线,请在线后兑换<br>";
                 var_dump($run);
@@ -301,7 +301,7 @@ if(isset($_POST["usecdk"])){
 		        ]);
             }
 	    }elseif($back1["start"]==2){
-            $run=json_decode(file_get_contents("http://34.tlapple.com:81/api/api.php?adminpass=blueyst&item=".$back1["item"]."&uid=".$_POST["uid"]."&number=".$back1["number"]),true);
+            $run=json_decode(file_get_contents("http://{{%IP_ADDRESS%}}:{{%WebSite_Port%}}/api/api.php?adminpass=blueyst&item=".$back1["item"]."&uid=".$_POST["uid"]."&number=".$back1["number"]),true);
             if($run["success"]==false){
                 echo "<font size='4' color= '#00BFFF'>玩家不在线,请在线后兑换<br>";
                 var_dump($run);
