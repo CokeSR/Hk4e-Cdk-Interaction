@@ -279,7 +279,7 @@ section .color:nth-child(3) {
               <a href="index.html">点击这里</a>
             </p>
             <?php
-include("./Method.php");
+include("../Method.php");
 if(isset($_POST["addpsd"])){
     $back=$database->select("fuli","*");
     if($_POST["adminpass"]=='888888'){

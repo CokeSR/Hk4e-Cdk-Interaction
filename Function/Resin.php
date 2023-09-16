@@ -316,5 +316,3 @@ if(isset($_POST["Resin"])){
   </body>
 
 </html>
-
-
